@@ -18,18 +18,17 @@ plugin = routing.Plugin()
 @plugin.route('/')
 def index():
     addDirectoryItem(plugin.handle, plugin.url_for(
-        show_category, quote("https://www.bilibili.com/video/av38301694",safe='')), ListItem("FeiLong"), True)
+        play_media, quote("https://www.bilibili.com/video/av38301694",safe='')), ListItem("FeiLong"), True)
     addDirectoryItem(plugin.handle, plugin.url_for(
-        show_category, quote("https://www.bilibili.com/video/av39523414",safe='')), ListItem("bilibili"), True)
+        play_media, quote("https://www.bilibili.com/video/av39523414",safe='')), ListItem("bilibili"), True)
     addDirectoryItem(plugin.handle, plugin.url_for(
-        show_category, quote("https://v.youku.com/v_show/id_XNDAwNDI2MDkwMA==.html?spm=a2h1n.8251846.0.0",safe='')), ListItem("youku"), True)
+        play_media, quote("https://v.youku.com/v_show/id_XNDAwNDI2MDkwMA==.html?spm=a2h1n.8251846.0.0",safe='')), ListItem("youku"), True)
     endOfDirectory(plugin.handle)
 
-
-@plugin.route('/category/<category_id>')
-def show_category(category_id):
-    print('cate=>', category_id)
-    playVideo(unquote(category_id))
+@plugin.route('/play/<url>')
+def play_media(url):
+    print('cate=>', url)
+    playVideo(unquote(url))
 
 def download_urls(
     urls, title, ext, total_size, output_dir='.', refer=None, merge=True,
